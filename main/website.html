@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Essentia</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500&family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./css/mainstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Square+Peg&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+            function dropMenu(){
+                const DropMenu = document.querySelector('.menu');
+                DropMenu.classList.toggle('active')
+            };
+    </script>
+</head>
+<body>
+        <!--- head section -->
+        
+    <div class="container">
+        <div class ='hero' id="1">
+            <span class="username"></span>
+            <div class="action">
+                <div class="profile" onclick="dropMenu();">
+                 <img id="profile" src="./img/user.png" alt="">
+                </div>
+                <div class="menu">
+                  <ul>
+                     <li><img src="./img/user.png" alt="" ><a href="" > My profile</a></li>
+                     <li><img src="./img/setting.png" alt="" id="imgg"><a href="">Setting</a></li>
+                     <li><img src="./img/logout.png" alt="" id="imgg"><a id="signoutlink" href="./log.html">Log out</a></li>
+                  </ul>
+                </div>
+            </div>
+            <nav class="navbar">
+                <h2 class="logo">Essens<span>tia</span></h2>
+                <ul>
+                    <li><a href="#1">Home</a></li>
+                    <li><a href="#2">Community</a></li>
+                    <li><a href="#3">About Us</a></li>
+                    <li><a href="#4">Contact us</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                </ul>
+                <a href="/login" class="btn" id="userlink">Login</a>
+            </nav>        
+            <div class="content">
+                <h4><span>W</span>elcome to Essentia</h4>
+                <h1>Go Beyond <span>Limit</span></h1>
+                <h3>Explore Now</h3>
+                <div class="newslatter">
+                    <form>
+                        <input type="email" name="email" id="mail" placeholder="Enter your mail">
+                        <input class="submitbtn" type="submit" name="submit" value="Subscribe">
+                    </form>
+                    <div class="tooltip">
+                        Be Updated!
+                    </div>
+                </div>
+            </div>
+            <div class="chat-bar-collapsible">
+                <a id="chat-button"  class="hello" ><img src="./img/chatbot.png"></a>
+                <div class="chat-content">
+                    <button id="chat-button" type="button" class="collapsible">Chat with us!
+                        <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+                    </button>
+                    <div class="full-chat-block">
+                        <!-- Message Container -->
+                        <div class="outer-container">
+                            <div class="chat-container">
+                                <!-- Messages -->
+                                <div id="chatbox">
+                                    <h5 id="chat-timestamp"></h5>
+                                    <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                                </div>
+        
+                                <!-- User input box -->
+                                <div class="chat-bar-input-block">
+                                    <div id="userInput">
+                                        <input id="textInput" class="input-box" type="text" name="msg"
+                                            placeholder="Tap 'Enter' to send a message">
+                                        <p></p>
+                                    </div>
+        
+                                    <div class="chat-bar-icons">
+                                        <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-heart"
+                                            onclick="heartButton()"></i>
+                                        <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                            onclick="sendButton()"></i>
+                                    </div>
+                                </div>
+        
+                                <div id="chat-bar-bottom">
+                                    <p></p>
+                                </div>
+        
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- internship section -->
+        <section id="2">
+            <div class="internship">
+                <div class="title">
+                    <h2><span>C</span>ommunity</h2>
+                </div>
+                
+                <div class="box">
+                    <div class="card" >
+                        <i class="fa-solid fa-list-check"></i>
+                        <h5>Project</h5>
+                        <div class="para">
+                            <p>Wanna know more about technology?
+                            </p>
+                            <p style ="text-align: center;">
+                                <a class="button" href="/project">join project</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card" >
+                        <i class="fa-solid fa-laptop"></i>
+                        <h5>Internship</h5>
+                        <div class="para">
+                            <p>Experience the real-time working as an employee by improvising your skills day by day.
+                            </p>
+                            <p style ="text-align: center;">
+                                <a class="button" href="/internship">apply</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card" >
+                        <i class="fa-solid fa-blog"></i>
+                        <h5>Blog</h5>
+                        <div class="para">
+                            <p> Have something on mind?say it out loud.let your voice be heard.
+        
+                            </p>
+                            <p style ="text-align: center;">
+                                <a class="button" href="/blog">read blogs</a>
+                                <a class="button" href="/editor">write blog</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--about section-->
+        <section class="about" id="3">
+            <div class="main">
+                <div class="motivation">
+                    <img src="./img/lion.jpg">
+                    <p class="about-para">"Dreams dont work unless you do."</p>
+                    <p class="author">-William Shakespeare</p>
+                </div>
+                 <div class="abt-content">
+                     <div class="abt-title">
+                         <h1><span>A</span>bout Us</h1>
+                         <!-- need to add some content-->
+                     </div>  
+                     <div class="abt-section">
+                        <p>Essentia is a platform that gives you a great connectivity with people in your own Community.</p>
+                        <div class="mision">
+                            <div>
+                                <i class="fa-solid fa-earth-asia"></i>
+                                <span>mision</span>
+                            </div>
+                            <p>We integrate people's mind with technology by providing them an opportuinty to establish themselves.</p>
+                        </div>
+                        <div class="vision">
+                            <div>
+                                <i class="fa-regular fa-eye"></i>
+                                <span>vision</span>
+                            </div>
+                            <p>A worldwide student Collaboration which enables every user to go beyond their limits.</p>
+                        </div>
+                     </div>   
+                 </div>
+             </div> 
+         </section>
+
+         <!--footer section-->
+
+        <footer id="4">
+            <p> Sirimuvva Pathikonda</p>
+            <p>For any further queries feel free to contact us </p>
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="end">copyRight By sirimuvva pathikonda</p>
+        </footer>
+    </div>
+
+</body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/chat.js"></script>
+    <script src="./js/responsive.js"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_G8CFR5EnHYUR29JC6v9aWXusbgRIsWQ",
+            authDomain: "essentia-community.firebaseapp.com",
+            projectId: "essentia-community",
+            storageBucket: "essentia-community.appspot.com",
+            messagingSenderId: "629775825274",
+            appId: "1:629775825274:web:2fbcf37436e2a45676bec3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import {getAuth,onAuthStateChanged,signOut } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+        const auth = getAuth();
+
+        function signout(){
+            signOut(auth).then(() => {
+            // Sign-out successful.
+                sessionStorage.removeItem("user");
+                localStorage.removeItem("user");
+                localStorage.removeItem("keepLoggedIn");
+                alert("signout successful")
+                window.location ='website.html'
+            }).catch((error) => {
+            // An error happened.
+            });
+        }
+
+        function getUsername(){
+            let keepLoggedIn = localStorage.getItem("keepLoggedIn");
+
+            if(keepLoggedIn == "yes"){
+                currentUser = localStorage.getItem("user");
+            }
+            else{ 
+                currentUser = sessionStorage.getItem("user");
+            }
+        }
+        let signoutlink = document.getElementById("signoutlink");
+        let userlink = document.getElementById("userlink");
+        var currentUser=null;
+        signoutlink.addEventListener("click",signout)
+
+        window.onload = function(){
+            getUsername();
+            if(currentUser == null){
+                signoutlink.innerText= "Login";
+                signoutlink.href = "/login";
+            }
+            else{ 
+                userlink.innerText= currentUser;
+                userlink.classList.replace("btn","username");
+                userlink.href = "";//to the userprofile
+                signoutlink.innerText= "Sign Out";
+                signoutlink.href = "javascript: signout()";
+            }
+        }
+    </script>
+
+</html>

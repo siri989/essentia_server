@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>creating a project</title>
+    <link rel="stylesheet" href="./css/create.css">
+</head>
+<body>
+
+    <section>
+        <nav class="navbar">
+            <a href="/"><h2 class="logo">Essens<span>tia</span></h2></a>
+            <ul>
+                <li><a href="/project">Home</a></li> 
+            </ul>
+            
+        </nav>
+         
+        <div class="login-box">
+            <h2></h2>
+            <form>
+              <div class="user-box">
+                <input type="text" placeholder="Project title" id="title">
+                <label id="name">Project Title </label>
+              </div>
+              <div class="user-box">
+                <label>Project banner :</label>
+                    <input type="file" class="banner" name="myfile">
+              </div>
+              <div class="user-box">
+                <label>Project Description :</label>
+                <textarea name="des" cols="30" rows="10" class="content">
+                    
+                </textarea> 
+              </div>
+              <div class="user-box">
+                <label>Category :</label>
+                    <select name="Category" class="cat">
+                        <option value="Web">Web Development</option>
+                        <option value="ml">Machine learning</option>
+                        <option value="cad">Design and Modeling</option>
+                        <option value="ece">electronics</option>
+                      </select>
+              </div>
+              <div class="user-box">
+                <label>Required members :</label>
+                    <input type="number" id="quantity" name="quantity" min="3" placeholder="3">
+              </div>
+
+              <div class="user-box">
+                <label>Project-detail(optional):</label>
+                    <input type="file" id="detail" name="myfile">
+              </div>
+
+             
+                
+                
+                    <a href="#">
+      
+                        Submit
+                        
+                      </a>
+                      <a href="#">
+      
+                        Reset
+                        
+                      </a>
+               
+                
+              </a>
+            </form>
+          </div>
+
+
+
+
+
+
+
+
+
+
+        
+    </section>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration,,,,
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_G8CFR5EnHYUR29JC6v9aWXusbgRIsWQ",
+        authDomain: "essentia-community.firebaseapp.com",
+        projectId: "essentia-community",
+        storageBucket: "essentia-community.appspot.com",
+        messagingSenderId: "629775825274",
+        appId: "1:629775825274:web:2fbcf37436e2a45676bec3",
+        databaseURL: "https://essentia-community-default-rtdb.firebaseio.com/",
+    };
+    const app = initializeApp(firebaseConfig);
+    import {collection, addDoc,getFirestore,doc, setDoc} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+    const db = getFirestore();
+    
+    function projectdetail(){
+        const title = document.getElementById('title').value;
+        const banner = document.getElementById('banner').value;
+        const content = document.getElementById('content').value;
+        const category = document.getElementById('cat').value;
+        const quantity = document.getElementById("quantity").value;
+        const detail = document.getElementById("detail").value;
+        try {
+            //need to change the title to the username-with titile for crud operatrion
+            setDoc(doc(db, "Project", title), {
+            Title:title,
+            Banner:banner,
+            Content:content,
+            Category:category,
+            Required_members:quantity,
+            Detail:detail         
+    });
+    alert("succefully created");
+    //window.location='./project.html';
+    } catch (e) {
+    console.error("Error adding document: ", e);
+    }
+
+    }
+    const sub = document.getElementById('btn');
+    sub.addEventListener('click',projectdetail);
+
+
+</script>
+</html>

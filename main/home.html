@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog : Homepage</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/blog-home.css">
+
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="/"><h2 class="logo">Essen<span>tia</span></h2></a> 
+
+        <ul class="links-container">
+            <li class="link-item"><a href="#" class="link">home</a></li>
+            <li class="link-item"><a href="/editor" class="link">editor</a></li>
+        </ul>
+    </nav>
+
+
+    <header class="header">
+        <div class="content">
+            <h1 class="heading">
+                <span class="small">welcome in the world of</span>
+                blog
+                <span class="no-fill">writing</span>
+            </h1>
+            <a href="/editor" class="btn">write a blog</a>
+        </div>
+    </header>
+
+    <!-- blog section -->
+    <section class="blogs-section">
+        <!-- <div class="blog-card">
+            <img src="img/header.png" class="blog-image" alt="">
+            <h1 class="blog-title">Lorem ipsum dolor sit amet consectetur.</h1>
+            <p class="blog-overview">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt incidunt fugiat quos porro repellat harum. Adipisci tempora corporis rem cum.</p>
+            <a href="/" class="btn dark">read</a>
+        </div> -->
+    </section>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration,,,,
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_G8CFR5EnHYUR29JC6v9aWXusbgRIsWQ",
+            authDomain: "essentia-community.firebaseapp.com",
+            projectId: "essentia-community",
+            storageBucket: "essentia-community.appspot.com",
+            messagingSenderId: "629775825274",
+            appId: "1:629775825274:web:2fbcf37436e2a45676bec3",
+            databaseURL: "https://essentia-community-default-rtdb.firebaseio.com/",
+        };
+        const app = initializeApp(firebaseConfig);
+        import {collection, addDoc,getFirestore,doc, setDoc, getDocs} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+        const db = getFirestore();
+
+        const blogSection = document.querySelector('.blogs-section');
+
+        const createBlog = (blog) => {
+            let data = blog.data();
+            blogSection.innerHTML += `
+            <div class="blog-card">
+                <img src="${data.bannerImage}" class="blog-image" alt="">
+                <h1 class="blog-title">${data.title.substring(0, 100) + '...'}</h1>
+                <p class="blog-overview">${data.article.substring(0, 200) + '...'}</p>
+                <a href="/${blog.id}" class="btn dark">read</a>
+            </div>
+            `;
+        }
+        const querySnapshot = await getDocs(collection(db, "Blog"));
+        querySnapshot.forEach((blog) => {
+        // doc.data() is never undefined for query doc snapshots
+        //console.log(doc.id, " => ", doc.data());
+        if(blog.id != decodeURI(location.pathname.split("/").pop())){
+            createBlog(blog);
+        }
+        });
+
+
+</script>
+</body>
+</html>

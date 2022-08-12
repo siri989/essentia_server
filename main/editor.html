@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog : Editor</title>
+
+    <link rel="stylesheet" href="./css/blog-home.css">
+    <link rel="stylesheet" href="./css/blog-editor.css">
+
+</head>
+<body>
+
+    <div class="banner">
+        <input type="file" accept="image/*" id="banner-upload" hidden>
+        <label for="banner-upload" class="banner-upload-btn"><img src="./img/upload.png" alt="upload banner"></label>
+    </div>
+    
+    <div class="blog">
+        <textarea type="text" class="title" placeholder="Blog title..."></textarea>
+        <textarea type="text" class="article" placeholder="Start writing here..."></textarea>
+    </div>
+
+    <div class="blog-options">
+        <button class="btn dark publish-btn">publish</button>
+        <input type="file" accept="image/*" id="image-upload" hidden>
+        <label for="image-upload" class="btn grey upload-btn">Upload Image</label>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration,,,,
+        const firebaseConfig = {
+            apiKey: "AIzaSyD_G8CFR5EnHYUR29JC6v9aWXusbgRIsWQ",
+            authDomain: "essentia-community.firebaseapp.com",
+            projectId: "essentia-community",
+            storageBucket: "essentia-community.appspot.com",
+            messagingSenderId: "629775825274",
+            appId: "1:629775825274:web:2fbcf37436e2a45676bec3",
+            databaseURL: "https://essentia-community-default-rtdb.firebaseio.com/",
+        };
+        const app = initializeApp(firebaseConfig);
+        import {collection, addDoc,getFirestore,doc, setDoc} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+        const db = getFirestore();
+
+        const blogTitleField = document.querySelector('.title');
+const articleFeild = document.querySelector('.article');
+
+// banner
+const bannerImage = document.querySelector('#banner-upload');
+const banner = document.querySelector(".banner");
+let bannerPath;
+
+const publishBtn = document.querySelector('.publish-btn');
+const uploadInput = document.querySelector('#image-upload');
+
+bannerImage.addEventListener('change', () => {
+    uploadImage(bannerImage, "banner");
+})
+
+uploadInput.addEventListener('change', () => {
+    uploadImage(uploadInput, "image");
+})
+
+const uploadImage = (uploadFile, uploadType) => {
+    const [file] = uploadFile.files;
+    if(file && file.type.includes("image")){
+        const formdata = new FormData();
+        formdata.append('image', file);
+
+        fetch('/upload', {
+            method: 'post',
+            body: formdata
+        }).then(res => res.json())
+        .then(data => {
+            if(uploadType == "image"){
+                addImage(data, file.name);
+            } else{
+                bannerPath = `${location.origin}/${data}`;
+                banner.style.backgroundImage = `url("${bannerPath}")`;
+            }
+        })
+    } else{
+        alert("upload Image only");
+    }
+}
+
+const addImage = (imagepath, alt) => {
+    let curPos = articleFeild.selectionStart;
+    let textToInsert = `\r![${alt}](${imagepath})\r`;
+    articleFeild.value = articleFeild.value.slice(0, curPos) + textToInsert + articleFeild.value.slice(curPos);
+}
+
+let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+publishBtn.addEventListener('click', () => {
+    if(articleFeild.value.length && blogTitleField.value.length){
+        // generating id
+        let letters = 'abcdefghijklmnopqrstuvwxyz';
+        let blogTitle = blogTitleField.value.split(" ").join("-");
+        let id = '';
+        for(let i = 0; i < 4; i++){
+            id += letters[Math.floor(Math.random() * letters.length)];
+        }
+
+        // setting up docName
+        let docName = `${blogTitle}-${id}`;
+        let date = new Date(); // for published at info
+    
+        //access firstore with db variable;
+        //need to change the doc-id section to the username
+        
+            setDoc(doc(db,"Blog",docName), {
+                title: blogTitleField.value,
+                article: articleFeild.value,
+                bannerImage: bannerPath,
+                publishedAt: `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`      
+        })
+        .then(() => {
+            location.href = `/${docName}`;
+        })
+        .catch((err) => {
+            console.error(err);
+        })
+            
+    }
+})
+
+
+</script>
+
+
+
+</body>
+</html>

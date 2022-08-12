@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/register.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: #303641;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container-register">
+        <div id="title">
+            <i class="material-icons lock">lock</i> Register
+        </div>
+
+        <div>
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div>
+                <input id="email" placeholder=" College Email" type="email" autocomplete="off" >
+            </div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div>
+                <input id="number" placeholder=" register number" type="text" >
+            </div>
+
+            
+
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="username" placeholder="Username" type="text">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">vpn_key</i>
+                </div>
+                <input id="password" placeholder="Password" type="password">
+            </div>
+
+            <div class="remember-me">
+                <input type="checkbox">
+                <span style="color: #DDD">I accept Terms of Service</span>
+            </div>
+            <button id="sub">Register</button>
+        </div>
+
+        <div class="privacy">
+            <a href="#">Privacy Policy</a>
+        </div>
+
+        <div class="register">
+            Do you already have an account?
+            <a href="/login"><button id="register-link">Log In here</button></a>
+        </div>
+        <div class="google">
+            Continue with college email :
+            <a id="googleid" class="google"><i class="fa-brands fa-google"></i></a>
+        </div>
+    </div>
+</body>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration,,,,
+    const firebaseConfig = {
+        apiKey: "AIzaSyD_G8CFR5EnHYUR29JC6v9aWXusbgRIsWQ",
+        authDomain: "essentia-community.firebaseapp.com",
+        projectId: "essentia-community",
+        storageBucket: "essentia-community.appspot.com",
+        messagingSenderId: "629775825274",
+        appId: "1:629775825274:web:2fbcf37436e2a45676bec3",
+        databaseURL: "https://essentia-community-default-rtdb.firebaseio.com/",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    import {getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+
+    const submit = document.getElementById("sub");
+    //realtime database
+    import {getDatabase,set,ref} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-database.js";
+    const rdb = getDatabase();
+
+    //firebase cloud
+    import {collection, addDoc,getFirestore,doc, setDoc} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-firestore.js";
+    const db = getFirestore();
+
+
+    const auth = getAuth(app);
+
+    const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const username = document.getElementById("username");
+        const rollno = document.getElementById("number");
+    //----validation--//
+    
+    function Validation(){
+let userregex = /^[a-zA-z0-9]+$/;
+let emailregex = /^[a-zA-Z0-9]+@(cithyd)+\.com$/;
+let passwordregex = /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g;
+let rollnoregex = /^[0-9]{10,}$/;
+
+
+
+if(!emailregex.test(email.value)){
+  alert("enter valid email id");
+  return false;
+}
+
+if(!userregex.test(username.value)){
+  alert("name must  have  numbers and letters");
+  return false;
+}
+
+
+
+if(!passwordregex.test(password.value)){
+  alert("name must have numbers and letters and special characters");
+  return false;
+}
+if(!rollnoregex.test(rollno.value)){
+    alert("only numbers");
+    return false;
+
+}
+
+
+return true;
+}
+
+function store(uid){
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const username = document.getElementById("username").value;
+        const rollno = document.getElementById("number").value;
+        setDoc(doc(db, "User", uid),{
+            Email:email,
+            Username:username,
+            Rollno:rollno,        
+            }).then(()=>{
+                window.location="/login";
+            })
+    }
+
+//--user ref--///
+    function Register(){
+        if(!Validation()){
+                return;
+        };
+
+        //creating the user
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+        .then((userCredit) => {
+        // Signed in 
+            const user = userCredit.user;
+            //alert(userCredit.uid);
+            //window.location="./log.html";
+            //alert(user.uid)
+            store(user.uid)
+            alert("succefully created");
+        // ...
+        })
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage);
+        // ..
+        });
+    }
+    submit.addEventListener('click',Register);
+    import {signInWithPopup, GoogleAuthProvider,signInWithRedirect} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-auth.js";
+
+    const google = document.getElementById("googleid");
+    const provider = new GoogleAuthProvider();
+
+    function Googlepopup(){
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+    }
+    google.addEventListener('click',Googlepopup);
+
+
+</script>
+
+    
+</html>
