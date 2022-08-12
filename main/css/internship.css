@@ -1,0 +1,284 @@
+
+@import url('../css/fonts.css');
+html,body{
+    margin:0%;
+    box-sizing: border-box;
+    overflow-x:hidden;
+}
+
+body{
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+:root{
+    /* Theme colors */
+    --text-gray:#3f4954;
+    --text-light:#686666da;
+    --bg-color:#0f0f0f;
+    --white:#ffffff;
+    --midnight:#104f55;
+
+    /*gradient color*/
+    --sky:linear-gradient(120deg,#a1c4fd,#c2e9fb 100%);
+        /*      theme font-family   */
+    --Abel: 'Abel', cursive;
+    --Anton: 'Anton', cursive;
+    --Josefin : 'Josefin', cursive;
+    --Lexend: 'Lexend', cursive;
+    --Livvic : 'Livvic', cursive;
+}
+/* ---------------- Global Classes ---------------*/
+
+a{
+    text-decoration: none;
+    color: var(--text-gray);
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;    
+    flex-wrap: wrap;
+}
+
+ul{
+    list-style-type: none;
+}
+
+h1{
+    font-family: var(--Lexend);
+    font-size: 2.5rem;
+}
+
+h2{
+    font-family: var(--Lexend);
+}
+
+h3{
+    font-family: var(--Abel);
+    font-size: 1.3rem;
+}
+
+button.btn{
+    border: none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    font-family: var(--Livvic);
+    cursor: pointer;
+}
+
+span{
+    font-family: var(--Abel);
+}
+
+.container{
+    margin: 0 5vw;
+}
+
+.text-gray{
+    color: var(--text-gray);
+}
+
+p{
+    font-family: var(--Lexend);
+    color: var(--text-light);
+}
+/*------navbar---*/
+/*------navbar---*/
+.navbar{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1%;
+    padding-right: 8%;
+    background-color: black;
+    height: 10vh;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-family: 'Josefin Sans',sans-serif;
+}
+.logo{
+    color:white;
+    font-size: 35px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding-top: -30pxpx; 
+    font-family: 'Josefin Sans',sans-serif;
+
+}
+span{
+    color: #f9004d;
+}
+nav ul li{
+    list-style-type: none;
+    display: inline;
+    padding: 10px 25px;
+}
+nav ul li a{
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: 20px;
+    font-family: 'Josefin Sans',sans-serif;
+}
+nav ul li a:hover{
+    color:#f9004d;
+    transition: 0.4s;
+}
+.user{
+    background-color: #3f4954;
+    height: 30px;
+    width:30px;
+    text-align: center;
+    border-radius: 15px;
+
+}
+nav i{
+    color: white;
+    padding-top: 4px;
+}
+
+
+
+
+
+/*main section      */
+/* site title*/
+.site-title{
+    background: url('../img/internhome.1.jpg');
+    background-size: cover;
+    height:110vh;
+    display:flex;
+    justify-content: center;
+
+}
+.site-background{
+    padding-top:12rem;
+    text-align: center;
+    color:rgb(7, 6, 6);
+}
+.site-title h1,h3{
+    margin:.3rem;  
+}
+.site-title .btn{
+    margin:1.8rem;
+    background: var(--sky);
+    border:none;
+    border-radius: 2rem;
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.site-title .btn:hover{
+    background: transparent;
+    color: white;
+    border:1px solid white;
+}
+
+/*__________________carhouse___________*/
+main .project{
+    background: url('../img/Abract01.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    height:100vh;
+    width:100%;
+    background-size: 65%;
+}
+main .project .project-post{
+    padding-top:6rem;
+}
+.project .pro-content{
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    width:80%;
+    margin:3rem 2rem;
+    box-shadow: 0 15px 20px rgba(0,0,0,0.2);
+}
+.pro-content .pro-title{
+    padding:2rem 0;
+
+}
+.pro-content .btn{
+    padding: .7rem 2rem;
+    background: var(--sky);
+    margin: .5rem;
+}
+.pro-content span{
+    display: block;
+}
+.container .owl-nav{
+    position: absolute;
+    top:0%;
+    margin:0 auto;
+    width:100%;
+}    
+.owl-nav .owl-prev .owl-nav-prev,
+.owl-nav .owl-next .owl-nav-next{
+    color: black;
+    background: transparent;
+    font-size: 2rem;
+}
+.owl-theme .owl-nav [class*='owl-']:hover{
+    background: transparent;
+    color: var(--midnight);
+}
+
+/* -------------------Footer--------------------*/
+.footer{
+    height:100%;
+    background: var(--bg-color);
+    position: relative;
+}
+.footer .container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding :36px 0;
+}
+
+.footer h2{
+    color: white;
+}
+
+.footer .follow i{
+    color: white;
+    padding:0 .4rem;
+}
+footer.footer .newsletter .form-element{
+    background: black;
+    display: inline-block;
+}
+.form-elements input{
+    padding: .5rem .7rem;
+    border: none;
+    background: transparent;
+    color: white;
+    font-family: var(--Josefin);
+    font-size: 1rem;
+    width: 74%;
+}
+.form-elements span{
+    background: var(--sky);
+    padding: .5rem .7rem;
+    cursor: pointer;
+}
+.newsletter{
+    margin-left: 40px;
+}
+.follow{
+    padding-left: 100px;
+}
+
+
+/* Viewport less than or equal to 750px  to overcome the minimizinge wrap*/
+
+@media only screen and (max-width:750px){
+    .nav-menu, .nav-items{
+        flex-direction: column;
+    }
+    .toggle-collapse{
+        display: initial;
+    }
+}
+
